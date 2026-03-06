@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "AntiDistraction YT",
+  "version": "1.0.0",
+  "author": "frz77",
+  "description": "Use your time wisely.",
+  "icons": {
+    "128": "icons/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

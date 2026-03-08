@@ -1,12 +1,16 @@
 {
   "manifest_version": 3,
   "name": "AntiDistraction YT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "frz77",
   "description": "Use your time wisely.",
   "icons": {
     "128": "icons/icon.png"
   },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage", "tabs"],
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],

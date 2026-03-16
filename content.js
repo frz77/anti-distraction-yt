@@ -100,10 +100,21 @@ chrome.storage.local.get(["isEnabled"], (result) => {
 
     if (isMainPage) {
       zenStyle.innerHTML = `
-            ytd-browse[page-subtype="home"], #header, #chips-wrapper, #buttons.ytd-masthead, #end.ytd-masthead { 
+            ytd-browse[page-subtype="home"], #header, #chips-wrapper { 
                 display: none !important; 
             }
             body { overflow: hidden !important; background: var(--yt-spec-general-background-a) !important; }
+
+            /* Скрываем всё в правой части, кроме колокольчика и аватара */
+            #buttons.ytd-masthead > *:not(ytd-notification-topbar-button-renderer),
+            #end.ytd-masthead > *:not(#buttons) {
+                display: none !important;
+            }
+
+            /* Показываем только колокольчик */
+            ytd-notification-topbar-button-renderer {
+                display: flex !important;
+            }
             
             #masthead-container {
                 background: transparent !important;
@@ -111,7 +122,7 @@ chrome.storage.local.get(["isEnabled"], (result) => {
                 top: 48% !important;
                 left: 50% !important;
                 transform: translate(-50%, -50%) !important;
-                width: 640px !important;
+                width: 760px !important;
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
@@ -119,9 +130,10 @@ chrome.storage.local.get(["isEnabled"], (result) => {
                 animation: smoothFade 0.6s ease-out forwards;
             }
 
+            /* Поисковая строка — основная часть */
             #center.ytd-masthead { 
-                width: 100% !important; 
-                margin: 0 !important;
+                flex: 1 !important;
+                margin: 0 8px !important;
                 display: flex !important;
                 justify-content: center !important;
             }
@@ -132,6 +144,18 @@ chrome.storage.local.get(["isEnabled"], (result) => {
             }
 
             #start.ytd-masthead { display: none !important; }
+
+            /* Выравниваем правую часть */
+            #end.ytd-masthead {
+                display: flex !important;
+                align-items: center !important;
+                flex-shrink: 0 !important;
+            }
+
+            #buttons.ytd-masthead {
+                display: flex !important;
+                align-items: center !important;
+            }
         `;
       showFocusMessage(true);
     } else {
